@@ -9,16 +9,29 @@
   <body>
     <div id="wrapper">
       <h1>Mystery Word</h1>
-
+      <br>
+      <br>
+      <p>{{game.display}}</p>
+      <br>
       <p>You have {{game.guessesLeft}} guesses left</p>
-
+      <br>
       <form action="/" method="post">
         <input type="text" name="guessLetter">
-        <input type="submit">
+        <input type="submit" value={{game.btnText}}>
       
+
       
       </form>
+      <br>
+      <p>{{game.message}}</p>
 
+      <br>
+      <br>
+      <p>word: {{game.word}}</p>
+      <br>
+      <p>Guessed Wrong: {{game.lettersGuessedWrong}}</p>
+      <br>
+      <p>Guessed Right: {{game.lettersGuessedRight}}</p>
     </div>
     
   </body>
