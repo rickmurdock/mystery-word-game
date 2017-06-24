@@ -8,31 +8,47 @@
   </head>
   <body>
     <div id="wrapper">
-      <h1>Mystery Word</h1>
+      <h1 id="mystery">
+        <div class="tilt-left">M</div>
+        <div class="tilt-right">y</div>
+        <div class="tilt-left">s</div>
+        <div class="tilt-right">t</div>
+        <div class="tilt-left">e</div>
+        <div class="tilt-right">r</div>
+        <div class="tilt-left">y</div>
+        <div class="tilt-right">&nbsp;&nbsp;</div>
+        <div class="tilt-left">W</div>
+        <div class="tilt-right">o</div>
+        <div class="tilt-left">r</div>
+        <div class="tilt-right">d</div>
+        <div class="tilt-left">&nbsp;&nbsp;</div>
+        <div class="tilt-right">G</div>
+        <div class="tilt-left">a</div>
+        <div class="tilt-right">m</div>
+        <div class="tilt-left">e</div>
+      </h1>
       <br>
       <br>
-      <p>{{game.display}}</p>
+      <div id="letter-wrapper">
+        {{#game.display}}
+          <div class="letters">{{.}}</div>
+        {{/game.display}}
+      </div>
       <br>
       <p>You have {{game.guessesLeft}} guesses left</p>
       <br>
       <form action="/" method="post">
         <input type="text" name="guessLetter">
         <input type="submit" value={{game.btnText}}>
-      
-
-      
       </form>
       <br>
+      <p>Letters guessed: {{game.lettersGuessed}}</p>
+      <br>
       <p>{{game.message}}</p>
-
       <br>
       <br>
+      <br><br><br><br>
       <p>word: {{game.word}}</p>
-      <br>
-      <p>Guessed Wrong: {{game.lettersGuessedWrong}}</p>
-      <br>
-      <p>Guessed Right: {{game.lettersGuessedRight}}</p>
     </div>
-    
   </body>
 </html>

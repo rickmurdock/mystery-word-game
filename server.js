@@ -1,4 +1,6 @@
+'use strict';
 const express = require('express');
+const expressValidator = require('express-validator');
 const mustacheExpress = require('mustache-express');
 const bodyParser = require('body-parser');
 const session = require('express-session');
@@ -17,38 +19,46 @@ app.set("view engine", "mustache");
 app.use("/", express.static("./public"));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(session(sessionConfig));
+app.use(expressValidator());
 
 app.use(function (req, res, next) {
   var game = req.session.game;
   if (!game) {
     game = req.session.game = {};
-    // game.word = words[3900];  // make random
-    let randomNumber = Math.floor((Math.random() * words.length-1) + 1)
-    game.word = words[randomNumber];
+    game.mode = 'easy';
+    game.word = findRandomWord(game.mode);
     game.guessesLeft = 8;
-    game.lettersGuessedWrong = [];
-    game.lettersGuessedRight = [];
+    game.lettersGuessed = [];
     game.btnText = 'Make a guess';
     game.status = '';
     game.message = '';
-    // game.display = '';
-    game.display = buildDisplay(game);
+    game.display = '';
+    // game.display = buildDisplay(game);
   }
-  // console.log("session IS", req.session);
+  game.display = buildDisplay(game);
   next();
 });
 
 //ROUTES
 app.get('/', function(req, res) {
+  req.session.game.display = buildDisplay(req.session.game);
   res.render('index', { game: req.session.game });
 });
 
 app.post('/', function(req, res) {
   var game = req.session.game;
-  var allLettersGuessed = game.lettersGuessedWrong.concat(game.lettersGuessedRight);
-  console.log('allLettersGuessed ',allLettersGuessed);
+  req.checkBody("guessLetter", "You must enter a letter!").notEmpty();
+  var errors = req.validationErrors();
+  console.log('ERRORS =', errors);
+    if (errors) {
+    game.message = errors[0].msg;
+  } else {
+
+  // var game = req.session.game;
+  console.log('lettersGuessed ',game.lettersGuessed);
   // check if letter already guessed else if not found or found
-  if (allLettersGuessed.indexOf(req.body.guessLetter) > -1) {
+  // if (allLettersGuessed.indexOf(req.body.guessLetter) > -1) {
+  if (game.lettersGuessed.indexOf(req.body.guessLetter) > -1) {
     game.message = 'You already guessed letter ' + req.body.guessLetter;
   } else { 
 
@@ -57,14 +67,23 @@ app.post('/', function(req, res) {
       // if (req.body.guessLetter.indexOf(game.letter)) 
       game.message = 'Bad guess...try again!';
       game.guessesLeft -= 1;
-      game.lettersGuessedWrong.push(req.body.guessLetter);
+      game.lettersGuessed.push(req.body.guessLetter);
+      if (game.guessesLeft == 0) {
+        game.message = 'YOU ARE A LOSER!!!!';
+        game.status = 'lose';
+      }
     } else {
-      game.lettersGuessedRight.push(req.body.guessLetter);
+      game.lettersGuessed.push(req.body.guessLetter);
       game.message = 'You guessed correctly.';
     }
   }
+
+}
+
+
 console.log("session IS", req.session);
-  res.render('index', { game: req.session.game });
+  // res.render('index', { game: req.session.game });  // redirect ???
+  res.redirect('/');
 });
 
 // LISTENER
@@ -73,12 +92,47 @@ app.listen(port, function() {
 });
 
 function buildDisplay(game) {
-  var showText = '';
-  // game.word.forEach(function(letter) {
-  //   showText += showText + letter + ' ';
-  // });
+  var showText = [];
   for (let i = 0; i < game.word.length; i++) {
-    showText = showText + game.word[i] + ' ';
+    if (game.lettersGuessed.indexOf(game.word[i]) > -1) {
+       showText.push(game.word[i].toUpperCase());
+     } else {
+       if (game.status == 'lose') {
+          showText.push(game.word[i].toUpperCase());
+       } else {
+          showText.push(' ');
+       }
+     }
   }
   return showText;
+};
+
+function findRandomWord(mode) {
+  let randomWord;
+  let wordLength = 0;
+  let wordFound = false;
+  // let randomNumber = Math.floor((Math.random() * words.length-1) + 1)
+  // randomWord = words[randomNumber];
+
+  while (!wordFound) {
+    let randomNumber = Math.floor((Math.random() * words.length-1) + 1)
+    randomWord = words[randomNumber];
+    wordLength = randomWord.length;
+    switch(mode) {
+      case 'easy':   // 4-6 characters
+          if (wordLength >= 4 && wordLength <= 6) {wordFound = true;}
+          break;
+      case 'normal': // 6-8 characters
+          if (wordLength >= 6 && wordLength <= 8) {wordFound = true;}
+          break;
+      case 'hard':  // 8+ characters
+          if (wordLength >= 8) {wordFound = true;}
+          break;
+      default:
+          wordFound = true;
+          break;
+    }
+  }
+
+  return randomWord;
 };

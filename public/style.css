@@ -15,17 +15,21 @@
 
 body {
     font-family: 'Roboto', sans-serif;
+    /*background-image: url('words.png');*/
 }
 
 #wrapper {
     margin: 0 auto;
-    width:532px;
+    /*width: 532px;*/
+    width: 50vw;
     text-align: center;
+    background-color: white;
 }
 
 h1 {
   color: blue;
-  font-size: 3em;
+  font-size: 4em;
+  margin: 30px 0;
 }
 
 input {
@@ -34,4 +38,55 @@ input {
 
 input[type=submit] {
   width: 100px;
+}
+
+#letter-wrapper {
+  display: flex;
+  flex-flow: row, nowrap;
+  background-color: green;
+  padding: 10px;
+}
+
+.letters {
+  border: 1px solid green;
+  margin: 5px;
+  width: 50px;
+  height: 50px;
+  font-size: 3em;
+  background-color: white;
+}
+
+.lettersLose {
+  border: 1px solid green;
+  margin: 5px;
+  width: 50px;
+  height: 50px;
+  font-size: 3em;
+  background-color: red;
+}
+
+#mystery {
+  border: 30px 0;
+  text-align: center;
+  display: flex;
+  flex-flow: row, nowrap;
+  align-items: center;
+  
+}
+.tilt-left {
+  transform: rotate(-7deg);
+  background-color: lightblue;
+}
+.tilt-left:hover {
+  transform: rotate(7deg);
+  background-color: lightblue;
+}
+
+.tilt-right {
+  transform: rotate(7deg);
+  background-color: yellow;
+}
+.tilt-right:hover {
+  transform: rotate(-7deg);
+  background-color: yellow;
 }
