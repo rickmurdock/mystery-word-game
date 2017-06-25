@@ -23,10 +23,12 @@
         <div class="tilt-right">d</div>
         <div class="tilt-left">&nbsp;&nbsp;</div>
         <div class="tilt-right">G</div>
-        <div class="tilt-left">a</div>
+        <div class="tilt-left" id="cheat">a
+          <span class="cheatText">{{game.word}}</span></div>
         <div class="tilt-right">m</div>
         <div class="tilt-left">e</div>
       </h1>
+      <!--<p class="cheatText">{{game.word}}</p>-->
       <br>
       <br>
       <div id="letter-wrapper">
@@ -35,20 +37,38 @@
         {{/game.display}}
       </div>
       <br>
-      <p>You have {{game.guessesLeft}} guesses left</p>
+      {{^game.lose}}
+        <p id="guess-left">You have {{game.guessesLeft}} guesses left.</p>
+      {{/game.lose}}
+      <!--<p id="guess-left">You have {{game.guessesLeft}} guesses left.</p>-->
+      {{#game.lose}}
+        <p id="guess-out">You are out of guesses.</p>
+      {{/game.lose}}
       <br>
       <form action="/" method="post">
-        <input type="text" name="guessLetter">
-        <input type="submit" value={{game.btnText}}>
+        {{#game.playing}}
+          <input type="text" name="guessLetter" placeholder="Enter a letter" maxlength="1" size"1" autofocus>
+        {{/game.playing}}
+        <!--{{^game.lose}}
+          <p id="win">{{game.status}}</p>
+        {{/game.lose}}-->
+        {{#game.lose}}
+          <p id="lose">{{game.status}}</p>
+        {{/game.lose}}
+        <input type="submit" value="{{game.btnText}}">
+        <br>
+        {{#game.playing}}
+          <p id="guesses">Letters guessed: {{game.lettersGuessed}}</p>
+          <br>
+          <p id="message">{{game.message}}</p>
+        {{/game.playing}}
+        <br>
+        {{^game.playing}}
+          <input type="radio" name="mode" value="easy" checked> Easy: words of 4-6 characters<br>
+          <input type="radio" name="mode" value="normal"> Normal: words of 6-8 characters<br>
+          <input type="radio" name="mode" value="hard"> Hard: words of 8+ characters
+        {{/game.playing}}
       </form>
-      <br>
-      <p>Letters guessed: {{game.lettersGuessed}}</p>
-      <br>
-      <p>{{game.message}}</p>
-      <br>
-      <br>
-      <br><br><br><br>
-      <p>word: {{game.word}}</p>
     </div>
   </body>
 </html>
