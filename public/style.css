@@ -18,18 +18,49 @@ body {
     /*background-image: url('words.png');*/
 }
 
+#background {
+      position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("words.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    opacity: 0.5;
+    filter: grayscale(.5);
+    z-index: -1;
+    filter:blur(3px);
+}
+
 #wrapper {
     margin: 0 auto;
+
     /*width: 532px;*/
-    width: 50vw;
+    width: 60vw;
+    height: 100vh;
     text-align: center;
-    background-color: white;
+    background-color: lightsteelblue;
+    box-shadow: 10px 10px 5px #888888;
+  
+}
+
+#wrapper-title {
+  margin: 0 auto;
+  padding: 40px;
+  display: flex;
+  flex-flow: row, nowrap;
+  
 }
 
 h1 {
   color: blue;
   font-size: 4em;
-  margin: 30px 0;
+  /*margin: 30px 0;*/
+  text-align: center;
+  width: 90%;
 }
 
 input {
@@ -42,6 +73,7 @@ input[type=submit] {
   width: 150px;
   color: white;
   background-color: blue;
+   box-shadow: 10px 10px 5px #888888;
 }
 
 #letter-wrapper {
@@ -82,6 +114,7 @@ input[type=submit] {
 .tilt-left {
   transform: rotate(-7deg);
   background-color: lightblue;
+   box-shadow: 10px 10px 5px #888888;
 }
 
 .tilt-left:hover {
@@ -92,6 +125,7 @@ input[type=submit] {
 .tilt-right {
   transform: rotate(7deg);
   background-color: yellow;
+   box-shadow: 10px 10px 5px #888888;
 }
 
 .tilt-right:hover {
@@ -120,10 +154,50 @@ input[type=submit] {
   visibility: visible;
 }
 
+#cheat:hover {
+  cursor: help;
+}
+
 #win {
   color: green;
 }
 
 #lose {
   color: red;
+}
+
+#wrapper-mode {
+  margin: 30px auto;
+  border: 1px solid blue;
+  padding: 20px;
+  width: 40%;
+  text-align: left;
+  line-height: 2em;
+  background-color: lightblue;
+  box-shadow: 10px 10px 5px #888888;
+}
+
+
+#circle {
+  background-color: palevioletred;
+  width: 100px;
+  height: 100px;
+  border-radius: 50px;
+  box-shadow: 10px 10px 5px #888888;
+  vertical-align: middle;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3em;
+  margin-bottom: 10px;
+  text-shadow: 0 0 3px #FF0000;
+}
+
+#guessCircle {
+  width: 100px;
+  font-size: 1em;
+}
+
+#wrapper-mode:hover {
+  box-shadow: inset 0 0 0 5px #53a7ea;
 }

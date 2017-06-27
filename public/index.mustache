@@ -7,27 +7,38 @@
     <link href="style.css" rel="stylesheet">
   </head>
   <body>
+    <div id="background"></div>
     <div id="wrapper">
-      <h1 id="mystery">
-        <div class="tilt-left">M</div>
-        <div class="tilt-right">y</div>
-        <div class="tilt-left">s</div>
-        <div class="tilt-right">t</div>
-        <div class="tilt-left">e</div>
-        <div class="tilt-right">r</div>
-        <div class="tilt-left">y</div>
-        <div class="tilt-right">&nbsp;&nbsp;</div>
-        <div class="tilt-left">W</div>
-        <div class="tilt-right">o</div>
-        <div class="tilt-left">r</div>
-        <div class="tilt-right">d</div>
-        <div class="tilt-left">&nbsp;&nbsp;</div>
-        <div class="tilt-right">G</div>
-        <div class="tilt-left" id="cheat">a
-          <span class="cheatText">{{game.word}}</span></div>
-        <div class="tilt-right">m</div>
-        <div class="tilt-left">e</div>
-      </h1>
+      <div id="wrapper-title">
+        <h1 id="mystery">
+          <div class="tilt-left">M</div>
+          <div class="tilt-right">y</div>
+          <div class="tilt-left">s</div>
+          <div class="tilt-right">t</div>
+          <div class="tilt-left">e</div>
+          <div class="tilt-right">r</div>
+          <div class="tilt-left">y</div>
+          <div class="tilt-right">&nbsp;&nbsp;</div>
+          <div class="tilt-left">W</div>
+          <div class="tilt-right">o</div>
+          <div class="tilt-left">r</div>
+          <div class="tilt-right">d</div>
+          <div class="tilt-left">&nbsp;&nbsp;</div>
+          <div class="tilt-right">G</div>
+          <div class="tilt-left" id="cheat">a
+            <span class="cheatText">{{game.word}}</span></div>
+          <div class="tilt-right">m</div>
+          <div class="tilt-left">e</div>
+        </h1>
+        <span>
+        <div id="guessCircle">
+           <div id="circle">
+            <p>{{game.guessesLeft}}</p>
+          </div>
+          <p>Guesses Left</p>
+        </div>
+</span>
+      </div>
       <!--<p class="cheatText">{{game.word}}</p>-->
       <br>
       <br>
@@ -37,13 +48,12 @@
         {{/game.display}}
       </div>
       <br>
-      {{^game.lose}}
+      <!--{{^game.lose}}
         <p id="guess-left">You have {{game.guessesLeft}} guesses left.</p>
       {{/game.lose}}
-      <!--<p id="guess-left">You have {{game.guessesLeft}} guesses left.</p>-->
       {{#game.lose}}
         <p id="guess-out">You are out of guesses.</p>
-      {{/game.lose}}
+      {{/game.lose}}-->
       <br>
       <form action="/" method="post">
         {{#game.playing}}
@@ -64,10 +74,14 @@
         {{/game.playing}}
         <br>
         {{^game.playing}}
+        <div id="wrapper-mode">
           <input type="radio" name="mode" value="easy" checked> Easy: words of 4-6 characters<br>
           <input type="radio" name="mode" value="normal"> Normal: words of 6-8 characters<br>
           <input type="radio" name="mode" value="hard"> Hard: words of 8+ characters
+        </div>
         {{/game.playing}}
+
+       
       </form>
     </div>
   </body>

@@ -7,7 +7,7 @@ const session = require('express-session');
 const sessionConfig = require("./sessionConfig");
 const fs = require('file-system');
 const app = express();
-const port = process.env.port || 3007;
+const port = process.env.port || 3000;
 const words = fs.readFileSync("/usr/share/dict/words", "utf-8").toLowerCase().split("\n");
 
 // SET VIEW ENGINE
