@@ -4,6 +4,9 @@
     <title>Mystery Word Game</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Stardos+Stencil" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Special+Elite" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah" rel="stylesheet">
     <link href="style.css" rel="stylesheet">
   </head>
   <body>
@@ -39,7 +42,6 @@
         </div>
 </span>
       </div>
-      <!--<p class="cheatText">{{game.word}}</p>-->
       <br>
       <br>
       <div id="letter-wrapper">
@@ -62,26 +64,42 @@
         <!--{{^game.lose}}
           <p id="win">{{game.status}}</p>
         {{/game.lose}}-->
-        {{#game.lose}}
-          <p id="lose">{{game.status}}</p>
-        {{/game.lose}}
+        <!--{{#game.lose}}-->
+        {{^game.playing}}
+          <div id="lose">{{game.status}}</div>
+        {{/game.playing}}
+        <!--{{/game.lose}}-->
         <input type="submit" value="{{game.btnText}}">
         <br>
-        {{#game.playing}}
-          <p id="guesses">Letters guessed: {{game.lettersGuessed}}</p>
-          <br>
-          <p id="message">{{game.message}}</p>
-        {{/game.playing}}
+        <!--{{#game.playing}}-->
+          <!--<p id="guesses">Letters guessed: {{game.lettersGuessed}}</p>-->
+          <!--<br>-->
+          <!--<p id="message">{{game.message}}</p>-->
+        <!--{{/game.playing}}-->
         <br>
+      <div id="bottom">
+        
+          <div class="wrapper-postit">
+            <div class="postit">Letters guessed<br><br>
+              &nbsp;{{game.lettersGuessed}}
+            </div>
+          </div>
+        <div id="right">
         {{^game.playing}}
-        <div id="wrapper-mode">
-          <input type="radio" name="mode" value="easy" checked> Easy: words of 4-6 characters<br>
-          <input type="radio" name="mode" value="normal"> Normal: words of 6-8 characters<br>
-          <input type="radio" name="mode" value="hard"> Hard: words of 8+ characters
-        </div>
+          <div id="wrapper-mode" class="card">
+            Game mode:<br><br>
+            <input type="radio" name="mode" value="easy" checked> Easy: words of 4-6 characters<br>
+            <input type="radio" name="mode" value="normal"> Normal: words of 6-8 characters<br>
+            <input type="radio" name="mode" value="hard"> Hard: words of 8+ characters
+          </div>
         {{/game.playing}}
 
-       
+        {{#game.playing}}
+          <p id="message">{{game.message}}</p>
+        {{/game.playing}}
+        </div>
+        
+      <div>
       </form>
     </div>
   </body>

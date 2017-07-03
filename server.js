@@ -10,6 +10,10 @@ const app = express();
 const port = process.env.port || 3000;
 const words = fs.readFileSync("/usr/share/dict/words", "utf-8").toLowerCase().split("\n");
 
+// var snd = new Audio("jeopardyThemeSong.mp3");
+
+// snd.play;
+
 // SET VIEW ENGINE
 app.engine("mustache", mustacheExpress());
 app.set("views", "./public");
@@ -84,7 +88,9 @@ app.post('/', function(req, res) {
             game.btnText = 'Try again';
             game.status = 'You win!';
             game.playing = false;
-            game.lose = false;
+            game.lose = true;
+            console.log("WIIIIIIINNNNNNNNN");
+            console.log('game PLAYING', game.playing);
           }
         }
       }
@@ -116,7 +122,8 @@ function buildDisplay(game) {
     if (game.lettersGuessed.indexOf(game.word[i]) > -1) {
        showText.push(game.word[i].toUpperCase());
      } else {
-       if (game.lose == true) {
+      //  if (game.lose == true) {
+       if (game.playing == false) {
           showText.push(game.word[i].toUpperCase());
        } else {
           showText.push(' ');
