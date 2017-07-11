@@ -51,11 +51,9 @@ app.post('/', function(req, res) {
   if (game.playing) {
     req.checkBody("guessLetter", "You must enter a letter!").notEmpty().isAlpha();
     var errors = req.validationErrors();
-    console.log('ERRORS =', errors);
     if (errors) {
       game.message = errors[0].msg;
     } else {
-      console.log('lettersGuessed ',game.lettersGuessed);
       // check if letter already guessed else if not found or found
       if (game.lettersGuessed.indexOf(req.body.guessLetter.toUpperCase()) > -1) {
         game.message = 'You already guessed letter ' + req.body.guessLetter.toUpperCase();;
@@ -97,7 +95,6 @@ app.post('/', function(req, res) {
     game.guessesLeft = 8;
     game.lettersGuessed = [];
   }
-  console.log("session IS", req.session);
   res.redirect('/');
 });
 
