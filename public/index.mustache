@@ -44,9 +44,7 @@
       </div>
       <div id="letter-wrapper">
         {{#game.display}}
-          <!--<div class="letters">{{.}}</div>-->
-{{{.}}}
-
+          {{{.}}}
         {{/game.display}}
       </div>
       <br>
@@ -57,19 +55,10 @@
             {{#game.playing}}
               <input type="text" name="guessLetter" placeholder="Enter a letter" maxlength="1" size"1" autofocus>
             {{/game.playing}}
-            <!--{{^game.playing}}
-              <div id="lose">{{game.status}}</div>
-            {{/game.playing}}-->
             <input type="submit" value="{{game.btnText}}"><span id="lose">&nbsp;&nbsp;{{game.status}}</span>
           </div>
-          <!--<div id="winmsg">-->
-            <!--{{^game.playing}}
-              <div id="lose">{{game.status}}</div>
-            {{/game.playing}}-->
-          <!--</div>-->
         </div>
         <br>
-        <!--</div>-->
         <div id="bottom">
           <div class="wrapper-postit">
             <div class="postit">Letters guessed<br><br>
