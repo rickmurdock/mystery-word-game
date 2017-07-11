@@ -34,72 +34,62 @@
           <div class="tilt-left">e</div>
         </h1>
         <span>
-        <div id="guessCircle">
-           <div id="circle">
-            <p>{{game.guessesLeft}}</p>
+          <div id="guessCircle">
+            <div id="circle">
+              <p>{{game.guessesLeft}}</p>
+            </div>
+            <p>Guesses Left</p>
           </div>
-          <p>Guesses Left</p>
-        </div>
-</span>
+        </span>
       </div>
-      <br>
-      <br>
       <div id="letter-wrapper">
         {{#game.display}}
-          <div class="letters">{{.}}</div>
+          <!--<div class="letters">{{.}}</div>-->
+{{{.}}}
+
         {{/game.display}}
       </div>
       <br>
-      <!--{{^game.lose}}
-        <p id="guess-left">You have {{game.guessesLeft}} guesses left.</p>
-      {{/game.lose}}
-      {{#game.lose}}
-        <p id="guess-out">You are out of guesses.</p>
-      {{/game.lose}}-->
       <br>
       <form action="/" method="post">
-        {{#game.playing}}
-          <input type="text" name="guessLetter" placeholder="Enter a letter" maxlength="1" size"1" autofocus>
-        {{/game.playing}}
-        <!--{{^game.lose}}
-          <p id="win">{{game.status}}</p>
-        {{/game.lose}}-->
-        <!--{{#game.lose}}-->
-        {{^game.playing}}
-          <div id="lose">{{game.status}}</div>
-        {{/game.playing}}
-        <!--{{/game.lose}}-->
-        <input type="submit" value="{{game.btnText}}">
+        <div id="top">
+          <div id="playarea">
+            {{#game.playing}}
+              <input type="text" name="guessLetter" placeholder="Enter a letter" maxlength="1" size"1" autofocus>
+            {{/game.playing}}
+            <!--{{^game.playing}}
+              <div id="lose">{{game.status}}</div>
+            {{/game.playing}}-->
+            <input type="submit" value="{{game.btnText}}"><span id="lose">&nbsp;&nbsp;{{game.status}}</span>
+          </div>
+          <!--<div id="winmsg">-->
+            <!--{{^game.playing}}
+              <div id="lose">{{game.status}}</div>
+            {{/game.playing}}-->
+          <!--</div>-->
+        </div>
         <br>
-        <!--{{#game.playing}}-->
-          <!--<p id="guesses">Letters guessed: {{game.lettersGuessed}}</p>-->
-          <!--<br>-->
-          <!--<p id="message">{{game.message}}</p>-->
-        <!--{{/game.playing}}-->
-        <br>
-      <div id="bottom">
-        
+        <!--</div>-->
+        <div id="bottom">
           <div class="wrapper-postit">
             <div class="postit">Letters guessed<br><br>
               &nbsp;{{game.lettersGuessed}}
             </div>
           </div>
-        <div id="right">
-        {{^game.playing}}
-          <div id="wrapper-mode" class="card">
-            Game mode:<br><br>
-            <input type="radio" name="mode" value="easy" checked> Easy: words of 4-6 characters<br>
-            <input type="radio" name="mode" value="normal"> Normal: words of 6-8 characters<br>
-            <input type="radio" name="mode" value="hard"> Hard: words of 8+ characters
+          <div id="right">
+            {{^game.playing}}
+              <div id="wrapper-mode" class="card">
+                Game mode:<br><br>
+                <input type="radio" name="mode" value="easy" checked> Easy: words of 4-6 characters<br>
+                <input type="radio" name="mode" value="normal"> Normal: words of 6-8 characters<br>
+                <input type="radio" name="mode" value="hard"> Hard: words of 8+ characters
+              </div>
+            {{/game.playing}}
+            {{#game.playing}}
+              <p id="message">{{game.message}}</p>
+            {{/game.playing}}
           </div>
-        {{/game.playing}}
-
-        {{#game.playing}}
-          <p id="message">{{game.message}}</p>
-        {{/game.playing}}
-        </div>
-        
-      <div>
+        <div>
       </form>
     </div>
   </body>

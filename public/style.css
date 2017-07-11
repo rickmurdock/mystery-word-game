@@ -145,7 +145,7 @@ input[type=submit] {
   font-size: 1em;
   visibility: hidden;
   position: absolute;
-  top: 50px;
+  top: 80px;
   z-index: 3;
  }
 
@@ -165,6 +165,13 @@ input[type=submit] {
 
 #lose {
   color: red;
+  /*position: relative;
+  top: -40px;
+  left: 200px;*/
+  z-index: 5;
+  font-family: 'Stardos Stencil', cursive;
+  font-size: 3em;
+  transform: rotate(8deg);
 }
 
 #wrapper-mode {
@@ -264,6 +271,10 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffff88', end
   position: relative;
   top: 50%;
   transform: translateY(-50%);
+}
+
+#top {
+  flex-flow: row, nowrap;
 }
 
 #bottom {

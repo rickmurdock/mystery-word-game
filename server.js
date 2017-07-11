@@ -82,8 +82,10 @@ app.post('/', function(req, res) {
           game.lettersGuessed.push(req.body.guessLetter.toUpperCase());
           game.message = '';
           // check for win ---------------------------
-          req.session.game.display = buildDisplay(req.session.game);
-          if (game.display.indexOf(' ') ==  -1) {
+          req.session.game.display = buildDisplay(req.session.game); ///////
+          // if (game.display.indexOf(' ') ==  -1) {
+          if (game.display.indexOf('<div class="letters" style="color:red"> </div>') ==  -1) {
+            
             game.message = '';
             game.btnText = 'Try again';
             game.status = 'You win!';
@@ -95,9 +97,10 @@ app.post('/', function(req, res) {
         }
       }
     }
-  } else {
+  } else { // !game.playing
     game.playing = true;
     game.btnText = "Make a guess";
+    game.status = '';                   /////
     game.mode = req.body.mode;
     game.word = findRandomWord(game.mode);
 
@@ -118,15 +121,31 @@ app.listen(port, function() {
 
 function buildDisplay(game) {
   var showText = [];
+  var value;
   for (let i = 0; i < game.word.length; i++) {
     if (game.lettersGuessed.indexOf(game.word[i]) > -1) {
-       showText.push(game.word[i].toUpperCase());
+      //  showText.push(game.word[i].toUpperCase());
+       
+  console.log('11111111');    
+      //  showText.push('<span style="color:blue">' + game.word[i].toUpperCase() + '</span>');
+
+          value = '<div class="letters" style="color:blue">' + game.word[i].toUpperCase() + '</div>'
+          showText.push(value);
+
      } else {
-      //  if (game.lose == true) {
-       if (game.playing == false) {
-          showText.push(game.word[i].toUpperCase());
+       if (game.lose == true) {
+      //  if (game.playing == false) {
+          // showText.push(game.word[i].toUpperCase());
+console.log('22222222');    
+          value = '<div class="letters" style="color:red">' + game.word[i].toUpperCase() + '</div>'
+          showText.push(value);
+
        } else {
-          showText.push(' ');
+          // showText.push(' ');
+console.log('3333333333');    
+          var value = '<div class="letters" style="color:red"> </div>'
+          showText.push(value);
+
        }
      }
   }
