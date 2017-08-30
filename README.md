@@ -2,6 +2,12 @@
 
 The Iron Yard Weekly Project: Build a game with Node and Express
 
+---
+
+### View the finished project: https://mysteryword-game.herokuapp.com/
+
+---
+
 You will implement the game Mystery Word as a web application. In your game, you will be playing against the computer.
 
 When a user that is not in a current game arrives at your root page, your app must select a word at random from the list of words in the file `/usr/share/dict/words`. This file exists on your computer already. You will have to read it with Node. The following line will read it and split it into words:
