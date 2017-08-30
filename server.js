@@ -8,7 +8,20 @@ const sessionConfig = require("./sessionConfig");
 const fs = require('file-system');
 const app = express();
 const port = process.env.port || 3000;
-const words = fs.readFileSync("/usr/share/dict/words", "utf-8").toLowerCase().split("\n");
+// const words = fs.readFileSync("/usr/share/dict/words", "utf-8").toLowerCase().split("\n");
+const words = [
+  "fish", "gold", "song", "dirt", "moon", "burn", "boat", "jump", "fork", "unit", "code",
+  "music", "solar", "grass", "water", "south", "party", "human", "robot", "silly",
+  "school", "cement", "monkey", "memory", "search", "estate", "buzzer", "quartz",
+  "eclipse", "recycle", "thought", "provoke", "drifter", "lantern", "dazzled",
+  "software", "dinosaur", "railroad", "currency", "zucchini", "joyfully", "hijacked",
+  "equalizer", "publicize", "piggyback", "equipment", "objection", "multiplex",
+  "basketball", "graduation", "government", "subjective", "vaporizing", "immobilize",
+  "nationality", "subtraction", "jeopardized", "uncivilized", "emphasizing",
+  "transmission", "metropolitan", "extravaganza", "unquenchable", "computerized",
+  "communication", "consciousness", "skateboarding", "international", "mathematician",
+  "infrastructure", "accomplishment", "procrastinator", "transportation"
+];
 
 // SET VIEW ENGINE
 app.engine("mustache", mustacheExpress());
